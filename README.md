@@ -1,4 +1,4 @@
-# CoinPulse — Crypto Price Tracker
+# CoinPulse - Crypto Price Tracker
 
 A simple React app that shows live prices for the top 100 cryptocurrencies by market cap, with instant search.
 
@@ -29,6 +29,4 @@ Then open [http://localhost:3000](http://localhost:3000).
 npm run deploy
 ```
 
-Builds the app and publishes it to GitHub Pages.
 
-**Live demo:** https://zahidhussain123.github.io/Cryptocurrency-price-tracker
