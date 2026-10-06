@@ -1,6 +1,6 @@
 # CoinPulse - Crypto Price Tracker
 
-A simple React app that shows live prices for the top 100 cryptocurrencies by market cap, with instant search.
+A simple React app that shows live prices for the top 100 cryptocurrencies by market cap, with quick search.
 
 ![CoinPulse preview](screenshots/preview.png)
 
