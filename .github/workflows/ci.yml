@@ -1,0 +1,53 @@
+name: CoinPulse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Download repository code
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Build React application
+        env:
+          CI: 'false'
+        run: npm run build
+
+      - name: Save production build
+        uses: actions/upload-artifact@v7
+        with:
+          name: coinpulse-build
+          path: build/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Check Docker image build
+        if: ${{ hashFiles('Dockerfile') != '' }}
+        run: docker build -t coinpulse:ci .
